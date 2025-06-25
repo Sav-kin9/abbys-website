@@ -1,0 +1,259 @@
+/* Reset default margin and set base font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+div, footer {
+  width: 100%;
+  height: 300px;
+}
+
+/* ============ HEADER SECTION ============ */
+
+header {
+  position: relative;
+  width: 100%;
+  min-height: 95vh;
+  padding: 60px 20px;
+  color: #4b0082;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 1;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('img/background.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(8px) brightness(0.9);
+  z-index: -1;
+}
+
+.header-text {
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0 15px;
+  margin-bottom: 50px; /* ✅ Pushes image slider down */
+  background-color: rgba(255, 255, 255, 0.4); /* optional soft glass effect */
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(2px); /* optional glassmorphism */
+}
+
+
+.header-text h1 {
+  font-size: clamp(32px, 6vw, 60px);
+  line-height: 1.2;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #4b0082;
+}
+
+.header-text p {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(18px, 3.5vw, 24px);
+  font-style: italic;
+  color: #000;
+}
+
+.header-text b {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(20px, 4vw, 28px);
+  color: #000;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+
+/* ============ IMAGE SLIDER ============ */
+
+.photoslider {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 10px;
+  overflow: hidden;
+}
+
+.slider-container {
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 20px;
+  align-items: center;
+}
+
+.slide {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  opacity: 0.5;
+  transition: all 0.4s ease;
+  transform: scale(0.8);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.slide.active {
+  transform: scale(1.1);
+  opacity: 1;
+  z-index: 2;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 28px;
+  color: #fff;
+  z-index: 5;
+  transition: background 0.3s ease;
+}
+
+.nav:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.nav.prev {
+  left: 10px;
+}
+
+.nav.next {
+  right: 10px;
+}
+
+/* ============ MOBILE OPTIMIZATION ============ */
+@media (max-width: 600px) {
+  header {
+    padding: 30px 15px;
+  }
+
+  .header-text {
+    max-width: 90%;
+  }
+
+  .header-text p {
+    font-size: 18px;
+  }
+
+  .header-text b {
+    font-size: 20px;
+  }
+
+  .slide {
+    width: 120px;
+    height: 180px;
+  }
+
+  .slide.active {
+    transform: scale(1);
+  }
+
+  .photoslider {
+    padding: 30px 5px;
+  }
+
+  .nav {
+    font-size: 22px;
+    padding: 8px;
+  }
+
+  .nav.prev {
+    left: 5px;
+  }
+
+  .nav.next {
+    right: 5px;
+  }
+}
+
+/* ============ BUTTON ============ */
+
+.btn {
+  max-width: 200px;
+  display: inline-block;
+  padding: 12px 28px;
+  color: #fff;
+  background-color: #4b0082;
+  border: 2px solid #4b0082;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(75, 0, 130, 0.3);
+  /* margin-top: 10px; */
+}
+
+.btn:hover {
+  background-color: #FFD700;
+  color: #4b0082;
+  border-color: #FFD700;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+  transform: translateY(-3px);
+}
+
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 10px rgba(75, 0, 130, 0.3);
+}
+
+/* HEADER ANIMATION BEGINS HERE */
+
+@keyframes zoomHero {
+  0% { background-size: 100%; }
+  50% { background-size: 102%; }
+  100% { background-size: 100%; }
+}
+
+/* HEADER ANIMATION ENDS HERE */
+
+
+/* FADE IN ANIMATION STARTS HERE */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* FADE IN ANIMATION ENDS HERE */
