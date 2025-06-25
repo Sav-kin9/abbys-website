@@ -172,12 +172,16 @@ header::before {
 
 /* ============ MOBILE OPTIMIZATION ============ */
 @media (max-width: 600px) {
-  header {
+  .header-main {
+    flex-direction: column;
     padding: 30px 15px;
   }
 
   .header-text {
     max-width: 90%;
+    margin-bottom: 30px;
+    align-items: center;
+    text-align: center;
   }
 
   .header-text p {
@@ -186,6 +190,16 @@ header::before {
 
   .header-text b {
     font-size: 20px;
+  }
+
+  .photoslider {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .slider {
+    gap: 10px;
   }
 
   .slide {
@@ -197,13 +211,9 @@ header::before {
     transform: scale(1);
   }
 
-  .photoslider {
-    padding: 30px 5px;
-  }
-
   .nav {
-    font-size: 22px;
-    padding: 8px;
+    font-size: 20px;
+    padding: 6px;
   }
 
   .nav.prev {
@@ -275,11 +285,11 @@ header::before {
 
 /* HEADER ANIMATION BEGINS HERE */
 
-@keyframes zoomHero {
+/* @keyframes zoomHero {
   0% { background-size: 100%; }
   50% { background-size: 102%; }
   100% { background-size: 100%; }
-}
+} */
 
 /* HEADER ANIMATION ENDS HERE */
 
