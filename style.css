@@ -88,7 +88,7 @@ header::before {
   font-size: clamp(18px, 3.5vw, 24px);
   font-style: italic;
   color: #000;
-}
+} 
 .header-text h1 {
   font-size: clamp(32px, 6vw, 60px);
   line-height: 1.2;
@@ -101,7 +101,7 @@ header::before {
   color: #000;
   line-height: 1.5;
   margin-bottom: 10px;
-}
+} 
 
 
 /* ============ IMAGE SLIDER ============ */
