@@ -8,10 +8,11 @@ let index = 0;
 function updateSlider() {
   slides.forEach(slide => slide.classList.remove('active'));
   slides[index].classList.add('active');
-  const offset = index * (slides[0].offsetWidth + 20); // width + gap
+  const offset = index * (slides[0].offsetWidth + 20);
   slider.style.transform = `translateX(calc(50% - ${offset}px - ${slides[0].offsetWidth / 2}px))`;
 }
 
+// Button click events
 nextBtn.addEventListener('click', () => {
   index = (index + 1) % slides.length;
   updateSlider();
@@ -22,14 +23,15 @@ prevBtn.addEventListener('click', () => {
   updateSlider();
 });
 
+// Optional: click-to-select slide (on desktop)
 slides.forEach((slide, i) => {
-  slide.addEventListener('mouseover', () => {
+  slide.addEventListener('click', () => {
     index = i;
     updateSlider();
   });
 });
 
-// Swipe Support
+// Swipe Support for touchscreen
 let startX = 0;
 
 slider.addEventListener('touchstart', (e) => {
@@ -52,6 +54,7 @@ updateSlider();
 
 
 
+
 // FADE IN EFFECT
  const faders = document.querySelectorAll('.fade-in');
 
@@ -71,3 +74,21 @@ updateSlider();
   faders.forEach(fade => {
     appearOnScroll.observe(fade);
   });
+
+
+  // SLIDER AUTOPLAY AND LOOPING 
+
+// Auto-play every 4 seconds
+let autoplayInterval = setInterval(() => {
+  index = (index + 1) % slides.length;
+  updateSlider();
+}, 4000);
+
+// Optional: pause on mouse over slider
+slider.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+slider.addEventListener('mouseleave', () => {
+  autoplayInterval = setInterval(() => {
+    index = (index + 1) % slides.length;
+    updateSlider();
+  }, 4000);
+});

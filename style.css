@@ -43,42 +43,58 @@ header::before {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   filter: blur(8px) brightness(0.9);
   z-index: -1;
+  animation: zoomHero 15s ease-in-out infinite;
 }
-
+.header-main {
+  width: 100%;
+  height: fit-content;
+  padding: 30px;
+  display: flex;
+  flex-direction: column; /* Mobile first: stacked */
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
 .header-text {
   width: 100%;
-  max-width: 320px;
+  max-width: 500px; /* limits width on desktop */
+  height: 400px;
+  margin: 0 auto 50px auto; /* center the box itself */
   text-align: center;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding: 0 15px;
-  margin-bottom: 50px; /* ✅ Pushes image slider down */
-  background-color: rgba(255, 255, 255, 0.4); /* optional soft glass effect */
+
   padding: 20px;
   border-radius: 12px;
-  backdrop-filter: blur(2px); /* optional glassmorphism */
+
+  background-color: rgba(255, 255, 255, 0.4); /* glassmorphism effect */
+  backdrop-filter: blur(2px);
 }
-
-
-.header-text h1 {
-  font-size: clamp(32px, 6vw, 60px);
-  line-height: 1.2;
-  font-family: 'Bebas Neue', sans-serif;
-  color: #4b0082;
+.header-text p,
+.header-text h1,
+.header-text b {
+  text-align: center;
+  width: 100%;
 }
-
 .header-text p {
   font-family: 'Dancing Script', cursive;
   font-size: clamp(18px, 3.5vw, 24px);
   font-style: italic;
   color: #000;
 }
-
+.header-text h1 {
+  font-size: clamp(32px, 6vw, 60px);
+  line-height: 1.2;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #4b0082;
+}
 .header-text b {
   font-family: 'Dancing Script', cursive;
   font-size: clamp(20px, 4vw, 28px);
@@ -92,7 +108,7 @@ header::before {
 
 .photoslider {
   position: relative;
-  width: 100%;
+  width: 30%;
   max-width: 1000px;
   margin: 0 auto;
   padding: 40px 10px;
@@ -199,8 +215,36 @@ header::before {
   }
 }
 
+
+@media (min-width: 768px) {
+  .header-main {
+    flex-direction: row; /* Side-by-side on desktop */
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 80px;
+  }
+
+  .header-text {
+    width: 50%;
+    text-align: left;
+    align-items: flex-start;
+    margin-bottom: 0;
+  }
+
+  .photoslider {
+    width: 50%;
+    max-width: 600px;
+  }
+}
+
 /* ============ BUTTON ============ */
 
+.btn-wrapper {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+}
 .btn {
   max-width: 200px;
   display: inline-block;
@@ -216,9 +260,7 @@ header::before {
   border-radius: 8px;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 5px 15px rgba(75, 0, 130, 0.3);
-  /* margin-top: 10px; */
 }
-
 .btn:hover {
   background-color: #FFD700;
   color: #4b0082;
@@ -226,7 +268,6 @@ header::before {
   box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
   transform: translateY(-3px);
 }
-
 .btn:active {
   transform: scale(0.98);
   box-shadow: 0 4px 10px rgba(75, 0, 130, 0.3);
