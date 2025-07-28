@@ -92,3 +92,116 @@ slider.addEventListener('mouseleave', () => {
     updateSlider();
   }, 4000);
 });
+
+// NAVBAR TOGGLE FOR MOBILE
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('open');
+  navLinks.classList.toggle('active');
+});
+
+
+// SIMPLE ADD-TO-CART LOGIC
+let cart = [];
+
+const productCards = document.querySelectorAll('.product-card');
+productCards.forEach(card => {
+  const name = card.querySelector('h3').innerText;
+  const price = card.querySelector('.price').innerText;
+  const img = card.querySelector('img').src;
+  const btn = card.querySelector('button');
+
+  btn.addEventListener('click', () => {
+    const product = {
+      name,
+      price,
+      img,
+      quantity: 1,
+    };
+
+    const existing = cart.find(item => item.name === product.name);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push(product);
+    }
+
+    alert(`✅ Added "${product.name}" to cart.`);
+    console.log(cart); // For dev/testing
+  });
+});
+
+// === CART LOGIC ===
+// let cart = [];
+
+const cartToggle = document.getElementById('cartToggle');
+const cartPanel = document.getElementById('cartPanel');
+const cartCount = document.getElementById('cartCount');
+const cartItemsEl = document.getElementById('cartItems');
+const cartTotalEl = document.getElementById('cartTotal');
+const closeCart = document.getElementById('closeCart');
+
+// Toggle Cart Panel
+cartToggle.addEventListener('click', () => {
+  cartPanel.classList.toggle('open');
+});
+
+closeCart.addEventListener('click', () => {
+  cartPanel.classList.remove('open');
+});
+
+// Update UI
+function updateCartUI() {
+  cartItemsEl.innerHTML = '';
+  let total = 0;
+
+  cart.forEach(item => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      ${item.name} x${item.quantity}
+      <button class="remove-item" data-name="${item.name}">❌</button>
+    `;
+    cartItemsEl.appendChild(li);
+
+    const cleanPrice = parseFloat(item.price.replace(/[^\d.]/g, ''));
+    total += cleanPrice * item.quantity;
+  });
+
+  cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartTotalEl.textContent = `₦${total.toLocaleString()}`;
+
+  // Remove buttons
+  document.querySelectorAll('.remove-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.name;
+      cart = cart.filter(item => item.name !== name);
+      updateCartUI();
+    });
+  });
+}
+
+// Hook into product cards
+// const productCards = document.querySelectorAll('.product-card');
+
+productCards.forEach(card => {
+  const name = card.querySelector('h3').innerText;
+  const price = card.querySelector('.price').innerText;
+  const img = card.querySelector('img').src;
+  const btn = card.querySelector('button');
+
+  btn.addEventListener('click', () => {
+    const product = { name, price, img, quantity: 1 };
+    const existing = cart.find(item => item.name === product.name);
+
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push(product);
+    }
+
+    updateCartUI();
+    alert(`✅ "${product.name}" added to cart.`);
+  });
+});
